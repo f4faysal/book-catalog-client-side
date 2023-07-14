@@ -1,42 +1,35 @@
 "use client";
+
 import * as React from "react";
+
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
-interface LoginFormInputs {
+interface SignupFormInputs {
+  name: string;
   email: string;
   password: string;
 }
 
-export function LoginForm({ className, ...props }: UserAuthFormProps) {
+export function SignupForm({ className, ...props }: UserAuthFormProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormInputs>();
+  } = useForm<SignupFormInputs>();
 
-  // const { user, isLoading } = useAppSelector((state) => state.user);
-  // const dispatch = useAppDispatch();
+  //   const dispatch = useAppDispatch();
 
-  // const navigate = useNavigate();
-
-  const onSubmit = (data: LoginFormInputs) => {
+  const onSubmit = (data: SignupFormInputs) => {
     console.log(data);
-
-    // dispatch(loginUser({ email: data.email, password: data.password }));
+    //     dispatch(createUser({ email: data.email, password: data.password }));
   };
-
-  // useEffect(() => {
-  //   if (user.email && !isLoading) {
-  //     navigate("/");
-  //   }
-  // }, [user.email, isLoading]);
 
   return (
     <div className="grid gap-6">
-      <h1 className=" w-full text-center text-2xl">EBook Login</h1>
+      <h1 className="w-full text-center text-2xl">EBook Register</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-2">
           <div className="grid gap-1 form-control">
@@ -67,16 +60,29 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
               {...register("password", { required: "Password is required" })}
             />
             {errors.password && <p>{errors.password.message}</p>}
+            <label className="label">
+              <span className="label-text"> Password</span>
+            </label>
+            <input
+              className="input input-bordered w-full max-w-xs"
+              id="password"
+              placeholder="confirm password"
+              type="password"
+              autoCapitalize="none"
+              autoComplete="password"
+            />
+            {errors.password && <p>{errors.password.message}</p>}
           </div>
+
           <div className="form-control mt-6">
-            <button className="btn btn-primary">Login</button>
+            <button className="btn btn-primary">Create Account</button>
           </div>
         </div>
       </form>
       <div>
-        <Link to="/signup" className="label-text-alt link link-hover">
+        <Link to="/login" className="label-text-alt link link-hover">
           {" "}
-          New user? Register Here
+          Already have an account? Login Here
         </Link>
       </div>
     </div>
