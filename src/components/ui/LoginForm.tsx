@@ -1,7 +1,10 @@
 "use client";
 import * as React from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../../redux/features/user/userSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
 
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -10,29 +13,31 @@ interface LoginFormInputs {
   password: string;
 }
 
-export function LoginForm({ className, ...props }: UserAuthFormProps) {
+export function LoginForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormInputs>();
 
-  // const { user, isLoading } = useAppSelector((state) => state.user);
-  // const dispatch = useAppDispatch();
+  const { user, isLoading } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onSubmit = (data: LoginFormInputs) => {
     console.log(data);
 
-    // dispatch(loginUser({ email: data.email, password: data.password }));
+    dispatch(loginUser({ email: data.email, password: data.password }));
   };
 
-  // useEffect(() => {
-  //   if (user.email && !isLoading) {
-  //     navigate("/");
-  //   }
-  // }, [user.email, isLoading]);
+  useEffect;
+
+  useEffect(() => {
+    if (user.email && !isLoading) {
+      navigate("/");
+    }
+  }, [user.email, isLoading]);
 
   return (
     <div className="grid gap-6">
