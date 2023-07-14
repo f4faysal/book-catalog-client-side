@@ -1,7 +1,23 @@
+import { signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.png";
+import { auth } from "../lib/firebase";
+import { setUser } from "../redux/features/user/userSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hook";
 
 export default function Navbar() {
+  const { user } = useAppSelector((state) => state.user);
+
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    console.log("Logout");
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      dispatch(setUser(null));
+    });
+  };
+
   return (
     <nav className="navbar bg-zinc-800 ">
       <div className="navbar container mx-auto">
@@ -28,24 +44,24 @@ export default function Navbar() {
               <li>
                 <Link to="/products">Products</Link>
               </li>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-              <li>
-                <Link to="/signup">signup</Link>
-              </li>
-              <li>
-                <Link to="/">Logout</Link>
-              </li>
+              {!user.email && (
+                <>
+                  <li>
+                    <Link to="/login">Login</Link>
+                  </li>
+                  <li>
+                    <Link to="/signup">signup</Link>
+                  </li>
+                </>
+              )}
+              {user.email && (
+                <li onClick={handleLogout}>
+                  <Link to="/">Logout</Link>
+                </li>
+              )}
             </ul>
           </div>
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-              </div>
-            </label>
-          </div>
+          {user.email && <div>{user.email}</div>}
         </div>
       </div>
     </nav>
