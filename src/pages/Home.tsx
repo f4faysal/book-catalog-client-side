@@ -1,3 +1,7 @@
 export default function Home() {
-  return <h1>home</h1>;
+  return (
+    <div>
+      <button className="btn btn-neutral">Neutral</button>
+    </div>
+  );
 }

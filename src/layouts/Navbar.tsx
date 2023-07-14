@@ -1,66 +1,53 @@
+import { Link } from "react-router-dom";
+import logo from "../assets/images/logo.png";
+
 export default function Navbar() {
   return (
-    <nav className="w-full h-16 fixed top backdrop-blur-lg z-10">
-      {/* <div className="h-full w-full bg-white/60">
-        <div className="flex items-center justify-between w-full md:max-w-7xl h-full mx-auto ">
-          <div>
-            <img className="h-8" src={logo} alt="log" />
+    <nav className="navbar bg-zinc-800 ">
+      <div className="navbar container mx-auto">
+        <div className="flex-1">
+          <Link to="/">
+            <img src={logo} className="w-28" />
+          </Link>
+        </div>
+        <div className="flex-none gap-2">
+          <div className="form-control">
+            <input
+              type="text"
+              placeholder="Search"
+              className="input input-bordered w-24 md:w-auto"
+            />
           </div>
-          <div>
-            <ul className="flex items-center">
+          <div className="flex-none gap-2">
+            <ul className="menu menu-horizontal px-1">
               <li>
-                <Button variant="link" asChild>
-                  <Link to="/">Home</Link>
-                </Button>
+                <Link className="justify-between" to="/">
+                  Profile <span className="badge">New</span>
+                </Link>
               </li>
               <li>
-                <Button variant="link" asChild>
-                  <Link to="/products">Products</Link>
-                </Button>
+                <Link to="/products">Products</Link>
               </li>
               <li>
-                <Button variant="link" asChild>
-                  <Link to="/checkout">Checkout</Link>
-                </Button>
+                <Link to="/login">Login</Link>
               </li>
               <li>
-                <Button variant="ghost">
-                  <HiOutlineSearch size="25" />
-                </Button>
+                <Link to="/signup">signup</Link>
               </li>
               <li>
-                <Cart />
-              </li>
-              <li className="ml-5">
-                <DropdownMenu>
-                  <DropdownMenuTrigger className="outline-none">
-                    <Avatar>
-                      <AvatarImage src="https://github.com/shadcn.png" />
-                      <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuLabel>Account</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem className="cursor-pointer">
-                      Profile
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="cursor-pointer">
-                      Billing
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="cursor-pointer">
-                      Team
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="cursor-pointer">
-                      Subscription
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                <Link to="/">Logout</Link>
               </li>
             </ul>
           </div>
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+              </div>
+            </label>
+          </div>
         </div>
-      </div> */}
+      </div>
     </nav>
   );
 }
