@@ -37,7 +37,7 @@ export default function Navbar() {
           <div className="flex-none gap-2">
             <ul className="menu menu-horizontal px-1">
               <li>
-                <Link className="justify-between" to="/">
+                <Link className="justify-between" to="/all-books">
                   All Books <span className="badge">New</span>
                 </Link>
               </li>
@@ -55,9 +55,14 @@ export default function Navbar() {
                 </>
               )}
               {user.email && (
-                <li onClick={handleLogout}>
-                  <Link to="/">Logout</Link>
-                </li>
+                <>
+                  <li>
+                    <Link to="/add-new-book">Add New Book</Link>
+                  </li>
+                  <li onClick={handleLogout}>
+                    <Link to="/">Logout</Link>
+                  </li>
+                </>
               )}
             </ul>
           </div>

@@ -1,12 +1,9 @@
 "use client";
-import * as React from "react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../redux/features/user/userSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
-
-type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
 interface LoginFormInputs {
   email: string;

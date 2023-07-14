@@ -4,7 +4,7 @@ import { api } from "../../api/apiSlice";
 const bookApi = api.injectEndpoints({
      endpoints: (builder) => ({
           getBooks: builder.query({
-               query: () => '/book',
+               query: ({ pag, limit }) => `/book?pag=${pag}&limit=${limit}`,
           }),
           singleBook: builder.query({
                query: (id) => `/book/${id}`,
