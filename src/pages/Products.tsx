@@ -1,3 +1,9 @@
+import { Card } from "../components/ui/Card";
+
 export default function Products() {
-  return <h1>Products</h1>;
+  return (
+    <div className="h-screen mt-4">
+      <Card />;
+    </div>
+  );
 }

@@ -7,7 +7,7 @@ export default function Navbar() {
       <div className="navbar container mx-auto">
         <div className="flex-1">
           <Link to="/">
-            <img src={logo} className="w-28" />
+            <img src={logo} className="w-24" />
           </Link>
         </div>
         <div className="flex-none gap-2">
