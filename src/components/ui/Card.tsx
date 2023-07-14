@@ -1,13 +1,34 @@
-export function Card() {
+import logo from "../../assets/images/logo.png";
+export function Card({ book }) {
+  const { title, author, genre, publicationDate } = book;
   return (
-    <div className="card w-96 bg-primary text-primary-content">
+    <div className="card w-auto bg-primary text-primary-content">
       <div className="card-body">
-        <h2 className="card-title">Card title!</h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
+        <figure>
+          / <img src={logo} className="w-2/3" alt="Book" />
+        </figure>
+        <h2 className="card-title">{title}</h2>
+        <p> Author : {author}</p>
+        <p> Genre : {genre}</p>
+        <p> Publication Date : {publicationDate}</p>
         <div className="card-actions justify-end">
-          <button className="btn">Buy Now</button>
+          <button className="btn">{publicationDate}</button>
         </div>
       </div>
     </div>
+    // <div className="card card-side bg-base-100 shadow-xl">
+    //   <figure>
+    //     <img src={logo} alt="Movie" />
+    //   </figure>
+    //   <div className="card-body">
+    //     <h2 className="card-title">{title}</h2>
+    //     <p>{author}</p>
+    //     <p>{genre}</p>
+    //     <p>{publicationDate}</p>
+    //     <div className="card-actions justify-end">
+    //       <button className="btn btn-primary">Watch</button>
+    //     </div>
+    //   </div>
+    // </div>
   );
 }

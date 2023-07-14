@@ -4,12 +4,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { api } from './api/apiSlice';
-import bookReducer from './features/products/bookSlice';
+import bookReducer from './features/book/bookSlice';
 import userReducer from './features/user/userSlice';
 
 const store = configureStore({
      reducer: {
-          produc: bookReducer,
+          book: bookReducer,
           user: userReducer,
           [api.reducerPath]: api.reducer,
      },

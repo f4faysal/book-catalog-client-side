@@ -1,11 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import Checkout from "../pages/Checkout";
+import AddNewBook from "../pages/AddNewBook";
+import AllBooks from "../pages/AllBooks";
+import AllBooksDetails from "../pages/AllBooksDetails";
+import EditBooks from "../pages/EditBooks";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
-import ProductDetails from "../pages/ProductDetails";
-import Products from "../pages/Products";
 import Signup from "../pages/Signup";
 
 const routes = createBrowserRouter([
@@ -18,16 +19,20 @@ const routes = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/products",
-        element: <Products />,
+        path: "/all-books",
+        element: <AllBooks />,
       },
       {
-        path: "/product-details/:id",
-        element: <ProductDetails />,
+        path: "/all-books-details/:id",
+        element: <AllBooksDetails />,
       },
       {
-        path: "/checkout",
-        element: <Checkout />,
+        path: "/add-new-book",
+        element: <AddNewBook />,
+      },
+      {
+        path: "/edit-ooks",
+        element: <EditBooks />,
       },
     ],
   },

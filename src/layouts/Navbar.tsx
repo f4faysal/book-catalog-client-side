@@ -38,7 +38,7 @@ export default function Navbar() {
             <ul className="menu menu-horizontal px-1">
               <li>
                 <Link className="justify-between" to="/">
-                  Profile <span className="badge">New</span>
+                  All Books <span className="badge">New</span>
                 </Link>
               </li>
               <li>
