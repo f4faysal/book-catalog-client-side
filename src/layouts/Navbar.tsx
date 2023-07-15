@@ -1,4 +1,9 @@
 import { signOut } from "firebase/auth";
+import { AiOutlineAppstoreAdd } from "react-icons/ai";
+import { FaCashRegister } from "react-icons/fa";
+import { FiBookOpen } from "react-icons/fi";
+import { MdMarkEmailRead, MdOutlineLogin } from "react-icons/md";
+import { RiLogoutBoxRFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 import { auth } from "../lib/firebase";
@@ -19,7 +24,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="navbar bg-zinc-800 ">
+    <nav className="navbar bg-neutral ">
       <div className="navbar container mx-auto">
         <div className="flex-1">
           <Link to="/">
@@ -27,18 +32,14 @@ export default function Navbar() {
           </Link>
         </div>
         <div className="flex-none gap-2">
-          <div className="form-control">
-            <input
-              type="text"
-              placeholder="Search"
-              className="input input-bordered w-24 md:w-auto"
-            />
-          </div>
-          <div className="flex-none gap-2">
+          <div className="form-control flex-none gap-2">
             <ul className="menu menu-horizontal px-1">
               <li>
                 <Link className="justify-between" to="/all-books">
-                  All Books <span className="badge">New</span>
+                  All Books{" "}
+                  <span className="badge">
+                    <FiBookOpen className="text-xl text-white" />
+                  </span>
                 </Link>
               </li>
               <li>
@@ -47,26 +48,42 @@ export default function Navbar() {
               {!user.email && (
                 <>
                   <li>
-                    <Link to="/login">Login</Link>
+                    <Link to="/login">
+                      {" "}
+                      <MdOutlineLogin /> Login
+                    </Link>
                   </li>
                   <li>
-                    <Link to="/signup">signup</Link>
+                    <Link to="/signup">
+                      <FaCashRegister /> signup
+                    </Link>
                   </li>
                 </>
               )}
               {user.email && (
                 <>
                   <li>
-                    <Link to="/add-new-book">Add New Book</Link>
+                    <Link to="/add-new-book">
+                      {" "}
+                      <AiOutlineAppstoreAdd className="text-xl text-white" />{" "}
+                      Add New
+                    </Link>
                   </li>
                   <li onClick={handleLogout}>
-                    <Link to="/">Logout</Link>
+                    <Link to="/">
+                      Logout <RiLogoutBoxRFill className="text-xl" />
+                    </Link>
                   </li>
                 </>
               )}
             </ul>
           </div>
-          {user.email && <div>{user.email}</div>}
+          {user.email && (
+            <div className="flex justify-center items-center gap-1">
+              {" "}
+              <MdMarkEmailRead className="text-xl text-white" /> {user.email}
+            </div>
+          )}
         </div>
       </div>
     </nav>

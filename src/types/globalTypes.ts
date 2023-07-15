@@ -6,3 +6,8 @@ export type IBook = {
      publicationDate: string;
      reviews: Array<string>;
 };
+
+export interface LoginFormInputs {
+     email: string;
+     password: string;
+}

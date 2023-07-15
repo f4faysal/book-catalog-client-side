@@ -6,8 +6,16 @@ interface CardProps {
   book: IBook;
 }
 
+interface bookTy {
+  _id: string;
+  title: string;
+  author: string;
+  genre: string;
+  publicationDate: string;
+}
+
 export function Card({ book }: CardProps) {
-  const { _id, title, author, genre, publicationDate } = book;
+  const { _id, title, author, genre, publicationDate }: Partial<bookTy> = book;
   return (
     <div className="card w-auto bg-primary text-primary-content">
       <div className="card-body">

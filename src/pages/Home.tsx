@@ -1,7 +1,7 @@
-import { CarouselHome } from "../components/ui/CarouselHome";
 import { Card } from "../components/ui/Card";
+import { CarouselHome } from "../components/ui/CarouselHome";
 import { useGetBooksQuery } from "../redux/features/book/bookApi";
-import { useAppDispatch, useAppSelector } from "../redux/hook";
+import { useAppDispatch } from "../redux/hook";
 import { IBook } from "../types/globalTypes";
 
 export default function Home() {
@@ -9,8 +9,8 @@ export default function Home() {
 
   const { data, isLoading, error } = useGetBooksQuery(limitation);
   // const { toast } = useToast();
-  const { status } = useAppSelector((state) => state.book);
-  console.log(status);
+  // const { status } = useAppSelector((state) => state.book);
+  // console.log(status);
 
   const dispatch = useAppDispatch();
 

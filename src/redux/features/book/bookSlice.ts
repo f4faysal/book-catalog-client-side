@@ -1,26 +1,37 @@
-
 import { createSlice } from '@reduxjs/toolkit';
 
-interface IBook {
-     status: boolean;
-     book: string
-}
-
-const initialState: IBook = {
-     status: false,
-     book: "EBook"
-
-};
-
-const bookSlice = createSlice({
-     name: 'book',
-     initialState,
-     reducers: {},
+const booksSlice = createSlice({
+     name: 'books',
+     initialState: {
+          books: [],
+          isLoading: false,
+          error: null,
+     },
+     reducers: {
+          getBooksSuccess: (state, action) => {
+               state.books = action.payload;
+               state.isLoading = false;
+               state.error = null;
+          },
+          getBooksStart: (state) => {
+               state.isLoading = true;
+               state.error = null;
+          },
+          getBooksFailure: (state, action) => {
+               state.isLoading = false;
+               state.error = action.payload;
+          },
+     },
 });
 
-// export const {  } = bookSlice.actions;
+export const {
+     getBooksStart,
+     getBooksSuccess,
+     getBooksFailure,
+} = booksSlice.actions;
 
-export default bookSlice.reducer;
+export default booksSlice.reducer;
+
 
 
 
