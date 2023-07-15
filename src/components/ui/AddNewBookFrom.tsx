@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAppSelector } from "../../redux/hook";
-import Modal from "../modal";
+import AddBookModal from "../AddBookModal";
 
 interface LoginFormInputs {
-  user?: string;
+  userEmail?: string;
   title: string;
   author: string;
   genre: string;
@@ -20,12 +20,14 @@ const AddNewBookFrom = () => {
     reset,
     formState: { errors },
   } = useForm<LoginFormInputs>();
+
   const onSubmit = (data: LoginFormInputs) => {
-    const bookData = { ...data, user: user?.email, reviews: [] };
+    const bookData = { ...data, userEmail: user?.email, reviews: [] };
     const openModal = () => window.conframModal.showModal();
     openModal();
     setbookData(bookData);
   };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="card w-96 bg-primary text-primary-content ">
@@ -95,7 +97,7 @@ const AddNewBookFrom = () => {
       </div>
 
       <>
-        <Modal getbookData={getbookData} reset={reset} />
+        <AddBookModal getbookData={getbookData} reset={reset} />
       </>
     </form>
   );

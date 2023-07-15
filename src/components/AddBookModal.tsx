@@ -1,21 +1,28 @@
+import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useCreateBookMutation } from "../redux/features/book/bookApi";
+import Loding from "./ui/Loding";
 
-const Modal = ({ getbookData, reset }: any) => {
+const AddBookModal = ({ getbookData, reset }) => {
   const navigate = useNavigate();
-  const { user, title, author, genre, publicationDate } = getbookData;
-  const uplodDb = () => {
-    console.log(getbookData);
+  const { title, author, genre, publicationDate } = getbookData;
+  const [createBook, { isLoading }] = useCreateBookMutation();
+
+  const uplodDb = async () => {
+    const response = await createBook(getbookData);
+    console.log(response);
+    toast.success(`Book ${response?.data?.data?.title} Add Success`);
     reset();
   };
+
+  if (isLoading) {
+    <Loding></Loding>;
+  }
+
   return (
     <dialog id="conframModal" className="modal">
-      <form method="dialog" className="modal-box text-left">
+      <form method="dialog" className="modal-box">
         <h3 className="font-bold text-lg">Add a new Book</h3>
-        <p className="my-1">
-          {" "}
-          <span className="font-semibold text-white"> Usere mail : </span>{" "}
-          {user}{" "}
-        </p>
         <p className="my-1">
           {" "}
           <span className="font-semibold text-white"> Title : </span> {title}{" "}
@@ -38,15 +45,14 @@ const Modal = ({ getbookData, reset }: any) => {
           {publicationDate}{" "}
         </p>
         <div className="modal-action">
-          {/* if there is a button in form, it will close the modal */}
-          <button onClick={uplodDb} className="btn">
+          <button onClick={uplodDb} className="btn btn-accent">
             Done
           </button>
-          <button className="btn">Close</button>
+          <button className="btn btn-info">Close</button>
         </div>
       </form>
     </dialog>
   );
 };
 
-export default Modal;
+export default AddBookModal;
