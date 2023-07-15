@@ -16,7 +16,7 @@ export default function AllBooks() {
   const { register, handleSubmit } = useForm();
   const [searchQuery, setSearchQuery] = useState("");
   const limitation = { pag: 1, limit: 50, searchTerm: searchQuery };
-  const FilterData = { genre: "", publicationDate: " " };
+  // const FilterData = { genre: "", publicationDate: " " };
   const dispatch = useAppDispatch();
 
   // Fetch books data
@@ -39,9 +39,9 @@ export default function AllBooks() {
 
   const onSubmit = (data: LoginFormInputs) => {
     console.log(searchQuery);
-    setSearchQuery(data.search);
+    setSearchQuery(data?.search);
   };
-  const { books } = useAppSelector((state) => state.books);
+  const { books } = useAppSelector((state: any) => state.books);
   const total = books?.length;
   console.log(books, total);
   if (isLoading) {

@@ -1,17 +1,34 @@
 import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import { useCreateBookMutation } from "../redux/features/book/bookApi";
 import Loding from "./ui/Loding";
 
-const AddBookModal = ({ getbookData, reset }) => {
-  const navigate = useNavigate();
+interface BookData {
+  title: string;
+  author: string;
+  genre: string;
+  publicationDate: string;
+}
+// const AddBookModal = ({ getbookData, reset }: any) => {
+const AddBookModal = ({
+  getbookData,
+  reset,
+}: {
+  getbookData: BookData;
+  reset: () => void;
+}) => {
+  // const navigate = useNavigate();
   const { title, author, genre, publicationDate } = getbookData;
   const [createBook, { isLoading }] = useCreateBookMutation();
 
   const uplodDb = async () => {
     const response = await createBook(getbookData);
     console.log(response);
-    toast.success(`Book ${response?.data?.data?.title} Add Success`);
+    if ("data" in response && response.data?.data?.title) {
+      toast.success(`Book ${response.data.data.title} Add Success`);
+    } else {
+      // Handle the case where 'data' property is missing or 'title' property is missing
+      toast.error("Failed to add book");
+    }
     reset();
   };
 

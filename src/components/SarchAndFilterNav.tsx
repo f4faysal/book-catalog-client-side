@@ -1,6 +1,11 @@
 import { BsSearch } from "react-icons/bs";
 
-const SarchAndFilterNav = ({ total, register, onSubmit, handleSubmit }) => {
+const SarchAndFilterNav = ({
+  total,
+  register,
+  onSubmit,
+  handleSubmit,
+}: any) => {
   return (
     <nav className="navbar bg-primary text-neutral-content">
       <div className="flex-1 flex-row-reverse">

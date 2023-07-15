@@ -1,4 +1,4 @@
-const DeleteModal = ({ handleDeleteBook, data }) => {
+const DeleteModal = ({ handleDeleteBook, data }: any) => {
   return (
     <dialog id="my_modal_1" className="modal">
       <form method="dialog" className="modal-box">

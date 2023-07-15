@@ -8,11 +8,7 @@ import {
 import { useAppSelector } from "../redux/hook";
 import Loding from "./ui/Loding";
 
-interface IProps {
-  id: string;
-}
-
-const BookReview = ({ id }: IProps) => {
+const BookReview = ({ id }: any) => {
   const [inputValue, setInputValue] = useState<string>("");
 
   const { user, isLoading: userisLoading } = useAppSelector(
@@ -28,7 +24,7 @@ const BookReview = ({ id }: IProps) => {
 
   const [postReview, { isLoading }] = usePostReviewMutation();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(inputValue);
     const options = {
@@ -60,7 +56,7 @@ const BookReview = ({ id }: IProps) => {
     setInputValue("");
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 

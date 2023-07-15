@@ -8,6 +8,7 @@ export type IBook = {
 };
 
 export interface LoginFormInputs {
+     search: string;
      email: string;
      password: string;
 }

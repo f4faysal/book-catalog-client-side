@@ -14,10 +14,10 @@ export default function BooksDetails() {
 
   const { user } = useAppSelector((state) => state.user);
 
-  const { data, isLoading, error } = useSingleBookQuery(id);
+  const { data, isLoading } = useSingleBookQuery(id);
   const [deleteBook, { isLoading: deleteIsLoading }] = useDeleteBookMutation();
   const navigate = useNavigate();
-  const handleDeleteBook = async (id) => {
+  const handleDeleteBook = async (id: any) => {
     try {
       await deleteBook(id);
       navigate("/all-books");
@@ -54,12 +54,37 @@ export default function BooksDetails() {
                     <Link to={`/edit-ooks/${data?.data?._id}`}>
                       <button className="btn btn-warning ">Edit</button>
                     </Link>
-                    <button
+                    {/* <button
                       onClick={() => window.my_modal_1.showModal()}
                       className="btn btn-error"
                     >
                       Delete
-                    </button>
+                    </button> */}
+
+                    {/* The button to open modal */}
+                    <label htmlFor="my_modal_6" className="btn">
+                      open modal
+                    </label>
+
+                    {/* Put this part before </body> tag */}
+                    <input
+                      type="checkbox"
+                      id="my_modal_6"
+                      className="modal-toggle"
+                    />
+                    <div className="modal">
+                      <div className="modal-box">
+                        <h3 className="font-bold text-lg">Hello!</h3>
+                        <p className="py-4">
+                          This modal works with a hidden checkbox!
+                        </p>
+                        <div className="modal-action">
+                          <label htmlFor="my_modal_6" className="btn">
+                            Close!
+                          </label>
+                        </div>
+                      </div>
+                    </div>
                   </>
                 ) : (
                   <>

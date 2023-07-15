@@ -11,8 +11,21 @@ interface LoginFormInputs {
   publicationDate: string;
   reviews?: Array<string>;
 }
+
+interface BookData {
+  title: string;
+  author: string;
+  genre: string;
+  publicationDate: string;
+}
 const AddNewBookFrom = () => {
-  const [getbookData, setbookData] = useState({});
+  const [getbookData, setbookData] = useState<BookData>({
+    // Specify BookData type here
+    title: "",
+    author: "",
+    genre: "",
+    publicationDate: "",
+  });
   const { user } = useAppSelector((state) => state.user);
   const {
     register,
