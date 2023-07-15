@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import SarchAndFilterNav from "../components/SarchAndFilterNav";
 import { Card } from "../components/ui/Card";
+import Loding from "../components/ui/Loding";
 import { useGetBooksQuery } from "../redux/features/book/bookApi";
 import {
   getBooksFailure,
@@ -19,13 +20,11 @@ export default function AllBooks() {
   const dispatch = useAppDispatch();
 
   // Fetch books data
-  const { data, isLoading } = useGetBooksQuery(limitation);
+  const { data, isLoading } = useGetBooksQuery(limitation, {
+    refetchOnMountOrArgChange: true,
+    pollingInterval: 10000,
+  });
 
-  // Fetch search results based on searchQuery
-  // const { data: searchData, isLoading: isSearchLoading } =
-  //   useGetSearchBooksQuery(searchQuery);
-
-  // Update Redux state with fetched data
   useEffect(() => {
     if (data) {
       dispatch(getBooksStart());
@@ -38,29 +37,19 @@ export default function AllBooks() {
     }
   }, [data, dispatch, searchQuery]);
 
-  // const {
-  //   data: searchData,
-  //   isError,
-  //   isLoading: isSearchLoading,
-  // } = useGetSearchBooksQuery(searchData);
-
   const onSubmit = (data: LoginFormInputs) => {
     console.log(searchQuery);
     setSearchQuery(data.search);
   };
-
-  // const handleFilter = (genre, publicationYear) => {
-  //   console.log(genre, publicationYear);
-  // };
-
   const { books } = useAppSelector((state) => state.books);
   const total = books?.length;
   console.log(books, total);
   if (isLoading) {
-    return <>Loding.....</>;
+    return <Loding />;
   }
+
   return (
-    <main>
+    <main className="min-h-screen">
       <header>
         <SarchAndFilterNav
           total={total}

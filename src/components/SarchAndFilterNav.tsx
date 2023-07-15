@@ -1,11 +1,5 @@
 import { BsSearch } from "react-icons/bs";
 
-interface FunctionTyp {
-  total: number;
-  handleFilter: (genre: string | null, year: string | null) => void;
-  onSubmit: () => void;
-}
-
 const SarchAndFilterNav = ({ total, register, onSubmit, handleSubmit }) => {
   return (
     <nav className="navbar bg-primary text-neutral-content">

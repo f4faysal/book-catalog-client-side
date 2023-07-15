@@ -28,9 +28,6 @@ export function Card({ book }: CardProps) {
           <p> Genre : {genre}</p>
           <p> Publication Date : {publicationDate}</p>
         </Link>
-        <div className="card-actions justify-end">
-          <button className="btn">{publicationDate}</button>
-        </div>
       </div>
     </div>
   );

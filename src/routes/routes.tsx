@@ -25,11 +25,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "/books-details/:id",
-        element: (
-          <PrivateRoute>
-            <BooksDetails />
-          </PrivateRoute>
-        ),
+        element: <BooksDetails />,
       },
       {
         path: "/add-new-book",
@@ -40,7 +36,7 @@ const routes = createBrowserRouter([
         ),
       },
       {
-        path: "/edit-ooks",
+        path: "/edit-ooks/:id",
         element: (
           <PrivateRoute>
             <EditBooks />{" "}
