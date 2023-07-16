@@ -37,7 +37,7 @@ const EdeitBook = () => {
       data: editData,
     };
     postEditBook(options);
-    toast.success("Commant Add Successfully!", {
+    toast.success("Updated Successfully!", {
       style: {
         border: "1px solid #713200",
         padding: "16px",
@@ -48,7 +48,6 @@ const EdeitBook = () => {
         secondary: "#FFFAEE",
       },
     });
-    
   };
 
   if (isLoading) {
