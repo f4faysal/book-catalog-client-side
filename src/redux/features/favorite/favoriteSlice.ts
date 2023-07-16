@@ -19,8 +19,7 @@ const favoriteSlice = createSlice({
                );
 
                if (existing) {
-                    state.favorite = state.favorite.filter(
-                         (book) => book?._id !== action.payload?._id)
+                    //
                } else {
                     state.favorite.push({ ...action.payload });
                }

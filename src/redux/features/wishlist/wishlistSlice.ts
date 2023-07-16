@@ -19,8 +19,7 @@ const wishlistSlice = createSlice({
                );
 
                if (existing) {
-                    state.wishlist = state.wishlist.filter(
-                         (book) => book?._id !== action.payload?._id)
+                    // 
                } else {
                     state.wishlist.push({ ...action.payload });
                }
