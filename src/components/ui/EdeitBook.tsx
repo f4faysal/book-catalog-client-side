@@ -48,8 +48,7 @@ const EdeitBook = () => {
         secondary: "#FFFAEE",
       },
     });
-    console.log(editData);
-    console.log(options);
+    
   };
 
   if (isLoading) {

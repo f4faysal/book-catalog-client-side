@@ -20,13 +20,11 @@ const BookReview = ({ id }: any) => {
     pollingInterval: 30000,
   });
 
-  //   console.log(data.data.reviews);
-
   const [postReview, { isLoading }] = usePostReviewMutation();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(inputValue);
+
     const options = {
       id: id,
       data: { reviews: inputValue },

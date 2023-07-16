@@ -21,7 +21,7 @@ export function SignupForm() {
   const dispatch = useAppDispatch();
 
   const onSubmit = (data: SignupFormInputs) => {
-    console.log(data);
+    
     dispatch(createUser({ email: data.email, password: data.password }));
   };
   const navigate = useNavigate();
