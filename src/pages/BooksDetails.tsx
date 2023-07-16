@@ -1,4 +1,5 @@
 import { toast } from "react-hot-toast";
+import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 import BookReview from "../components/BookReview";
@@ -8,6 +9,7 @@ import {
   useDeleteBookMutation,
   useSingleBookQuery,
 } from "../redux/features/book/bookApi";
+import { addToFavorite } from "../redux/features/favorite/favoriteSlice";
 import { addToWishlist } from "../redux/features/wishlist/wishlistSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { IBook } from "../types/globalTypes";
@@ -16,6 +18,7 @@ export default function BooksDetails() {
   const { id } = useParams();
 
   const { user } = useAppSelector((state) => state.user);
+
   const { data, isLoading } = useSingleBookQuery(id);
   const [deleteBook, { isLoading: deleteIsLoading }] = useDeleteBookMutation();
   const navigate = useNavigate();
@@ -32,6 +35,10 @@ export default function BooksDetails() {
   const handleAddWishlist = (book: IBook) => {
     dispatch(addToWishlist(book));
     toast.success("Wishlist Added");
+  };
+  const handleAddFavorite = (book: IBook) => {
+    dispatch(addToFavorite(book));
+    toast.success("Currently Reading Added");
   };
   if (isLoading) {
     return <Loding />;
@@ -60,6 +67,12 @@ export default function BooksDetails() {
                   className="btn btn-outline "
                 >
                   Wishlist
+                </button>
+                <button
+                  onClick={() => handleAddFavorite(data?.data)}
+                  className="btn btn-success "
+                >
+                  <MdOutlineFavoriteBorder className="text-2xl text-red-700" />
                 </button>
                 {user?.email === data?.data?.userEmail ? (
                   <>

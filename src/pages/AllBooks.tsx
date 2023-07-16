@@ -14,8 +14,12 @@ import { IBook, LoginFormInputs } from "../types/globalTypes";
 
 export default function AllBooks() {
   const { register, handleSubmit } = useForm();
+  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOptionDate, setselectedOptionDate] = useState("");
+
   const [searchQuery, setSearchQuery] = useState("");
   const limitation = { pag: 1, limit: 50, searchTerm: searchQuery };
+
   // const FilterData = { genre: "", publicationDate: " " };
   const dispatch = useAppDispatch();
 
@@ -28,7 +32,6 @@ export default function AllBooks() {
   useEffect(() => {
     if (data) {
       dispatch(getBooksStart());
-      console.log("total ->", data);
       if (data.success) {
         dispatch(getBooksSuccess(data.data));
       } else {
@@ -42,12 +45,38 @@ export default function AllBooks() {
     setSearchQuery(data?.search);
   };
   const { books } = useAppSelector((state: any) => state.books);
-  const total = books?.length;
-  console.log(books, total);
+
+  const handleSelectChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    setSelectedOption(event.target.value);
+    console.log(event.target.value);
+  };
+  const handleSelectChangeDate = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    event.preventDefault();
+    setselectedOptionDate(event.target.value);
+    console.log(event.target.value);
+  };
+
+  let serchAndFilterBook = [];
+  let total;
+  if (selectedOption.length) {
+    serchAndFilterBook = books.filter((b: any) => b.genre === selectedOption);
+    total = serchAndFilterBook.length;
+  } else if (selectedOptionDate.length) {
+    serchAndFilterBook = books.filter(
+      (b: any) => b.publicationDate === selectedOptionDate
+    );
+    total = serchAndFilterBook.length;
+  } else {
+    serchAndFilterBook = books;
+    total = serchAndFilterBook.length;
+  }
+
   if (isLoading) {
     return <Loding />;
   }
-
   return (
     <main className="min-h-screen">
       <header>
@@ -56,11 +85,15 @@ export default function AllBooks() {
           handleSubmit={handleSubmit}
           register={register}
           onSubmit={onSubmit}
+          handleSelectChange={handleSelectChange}
+          selectedOption={selectedOption}
+          handleSelectChangeDate={handleSelectChangeDate}
+          selectedOptionDate={selectedOptionDate}
         />
       </header>
       <section>
         <div className="container mx-auto grid grid-cols-4 gap-2 my-4">
-          {books?.map((book: IBook, i: number) => (
+          {serchAndFilterBook?.map((book: IBook, i: number) => (
             <Card book={book} key={i} />
           ))}
         </div>

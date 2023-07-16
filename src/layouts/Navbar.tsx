@@ -2,7 +2,8 @@ import { signOut } from "firebase/auth";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { FaCashRegister } from "react-icons/fa";
 import { FiBookOpen } from "react-icons/fi";
-import { MdMarkEmailRead, MdOutlineLogin } from "react-icons/md";
+import { ImList } from "react-icons/im";
+import { MdMarkEmailRead, MdOutlineLogin, MdPlaylistAdd } from "react-icons/md";
 import { RiLogoutBoxRFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.png";
@@ -36,14 +37,21 @@ export default function Navbar() {
             <ul className="menu menu-horizontal px-1">
               <li>
                 <Link className="justify-between" to="/all-books">
+                  <FiBookOpen className="text-xl text-white" />
                   All Books{" "}
-                  <span className="badge">
-                    <FiBookOpen className="text-xl text-white" />
-                  </span>
                 </Link>
               </li>
               <li>
-                <Link to="/wishlist">Wishlist</Link>
+                <Link to="/wishlist">
+                  {" "}
+                  <ImList /> Wishlist
+                </Link>
+              </li>
+              <li>
+                <Link to="/currently-reading">
+                  <MdPlaylistAdd className="text-2xl" />
+                  Currently Reading
+                </Link>
               </li>
               {!user.email && (
                 <>

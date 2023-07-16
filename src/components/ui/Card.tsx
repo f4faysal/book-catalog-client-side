@@ -16,6 +16,7 @@ interface bookTy {
 
 export function Card({ book }: CardProps) {
   const { _id, title, author, genre, publicationDate }: Partial<bookTy> = book;
+
   return (
     <div className="card w-auto bg-primary text-primary-content">
       <div className="card-body">

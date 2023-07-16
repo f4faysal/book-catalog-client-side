@@ -1,35 +1,66 @@
 import { BsSearch } from "react-icons/bs";
+import { useAppSelector } from "../redux/hook";
+import { IBook } from "../types/globalTypes";
+
+interface Iook {
+  books: IBook[];
+}
 
 const SarchAndFilterNav = ({
   total,
   register,
   onSubmit,
   handleSubmit,
+  handleSelectChange,
+  selectedOption,
+  handleSelectChangeDate,
+  selectedOptionDate,
 }: any) => {
+  const { books }: Iook = useAppSelector((state) => state.books);
+  const uniquePublicationDates = [
+    ...new Set(books.map((b): any => b.publicationDate)),
+  ];
+  // Extract all genres from books array
+  const genres = books.map((book): any => book.genre);
+  // Get unique genres using Set data structure
+  const uniqueGenreDates = [...new Set(genres)];
+
   return (
     <nav className="navbar bg-primary text-neutral-content">
       <div className="flex-1 flex-row-reverse">
-        <ul className="menu bg-base-200 lg:menu-horizontal rounded-box">
-          <li>
-            <input
-              type="text"
-              placeholder="Genre"
-              //     onChange={(e) => handleFilter(e.target.value, null)}
-            />
-          </li>
-          <li>
-            <input
-              type="text"
-              placeholder="Publication Year"
-              //     onChange={(e) => handleFilter(null, e.target.value)}
-            />
-          </li>
-        </ul>
+        <select
+          className=" select select-info w-full max-w-xs"
+          value={selectedOptionDate}
+          onChange={handleSelectChangeDate}
+        >
+          <option disabled value="">
+            Select Filter Publication Date !
+          </option>
+          <option value="">All</option>
+          {uniquePublicationDates.map((sinflrPublicationDates) => (
+            <option value={sinflrPublicationDates}>
+              {sinflrPublicationDates}
+            </option>
+          ))}
+        </select>
 
-        {/* Filtering options */}
-
-        {/* Book list */}
+        <select
+          className=" select select-info w-full max-w-xs"
+          value={selectedOption}
+          onChange={handleSelectChange}
+        >
+          <option disabled value="">
+            Select Filter For Genre !
+          </option>
+          <option value="">All</option>
+          {uniqueGenreDates.map((g) => (
+            <option className="" value={g}>
+              {g}
+            </option>
+          ))}
+        </select>
       </div>
+
       {/* ---------------------- */}
       <form className="flex-1" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-control">
