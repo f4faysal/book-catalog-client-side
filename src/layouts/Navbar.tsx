@@ -43,7 +43,7 @@ export default function Navbar() {
                 </Link>
               </li>
               <li>
-                <Link to="/products">Products</Link>
+                <Link to="/wishlist">Wishlist</Link>
               </li>
               {!user.email && (
                 <>

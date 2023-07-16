@@ -11,9 +11,11 @@ interface BookData {
 // const AddBookModal = ({ getbookData, reset }: any) => {
 const AddBookModal = ({
   getbookData,
+  setbookData,
   reset,
 }: {
   getbookData: BookData;
+  setbookData: any;
   reset: () => void;
 }) => {
   // const navigate = useNavigate();
@@ -22,7 +24,7 @@ const AddBookModal = ({
 
   const uplodDb = async () => {
     const response = await createBook(getbookData);
-    console.log(response);
+    setbookData({});
     if ("data" in response && response.data?.data?.title) {
       toast.success(`Book ${response.data.data.title} Add Success`);
     } else {
@@ -37,38 +39,43 @@ const AddBookModal = ({
   }
 
   return (
-    <dialog id="conframModal" className="modal">
-      <form method="dialog" className="modal-box">
-        <h3 className="font-bold text-lg">Add a new Book</h3>
-        <p className="my-1">
-          {" "}
-          <span className="font-semibold text-white"> Title : </span> {title}{" "}
-        </p>
-        <p className="my-1">
-          {" "}
-          <span className="font-semibold text-white"> Author : </span>
-          {author}{" "}
-        </p>
-        <p className="my-1">
-          {" "}
-          <span className="font-semibold text-white"> Genre : </span> {genre}{" "}
-        </p>
-        <p className="my-1">
-          {" "}
-          <span className="font-semibold text-white">
+    <>
+      <input type="checkbox" id="add_book_modal" className="modal-toggle" />
+      <div className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Add a new Book</h3>
+          <p className="my-1">
             {" "}
-            Publication Date :
-          </span>{" "}
-          {publicationDate}{" "}
-        </p>
-        <div className="modal-action">
-          <button onClick={uplodDb} className="btn btn-accent">
-            Done
-          </button>
-          <button className="btn btn-info">Close</button>
+            <span className="font-semibold text-white"> Title : </span> {title}{" "}
+          </p>
+          <p className="my-1">
+            {" "}
+            <span className="font-semibold text-white"> Author : </span>
+            {author}{" "}
+          </p>
+          <p className="my-1">
+            {" "}
+            <span className="font-semibold text-white"> Genre : </span> {genre}{" "}
+          </p>
+          <p className="my-1">
+            {" "}
+            <span className="font-semibold text-white">
+              {" "}
+              Publication Date :
+            </span>{" "}
+            {publicationDate}{" "}
+          </p>
+          <div className="modal-action">
+            <label onClick={uplodDb} htmlFor="add_book_modal" className="btn">
+              Done!
+            </label>
+            <label htmlFor="add_book_modal" className="btn">
+              Close!
+            </label>
+          </div>
         </div>
-      </form>
-    </dialog>
+      </div>
+    </>
   );
 };
 

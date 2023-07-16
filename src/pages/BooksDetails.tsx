@@ -1,3 +1,4 @@
+import { toast } from "react-hot-toast";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 import BookReview from "../components/BookReview";
@@ -7,13 +8,14 @@ import {
   useDeleteBookMutation,
   useSingleBookQuery,
 } from "../redux/features/book/bookApi";
-import { useAppSelector } from "../redux/hook";
+import { addToWishlist } from "../redux/features/wishlist/wishlistSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hook";
+import { IBook } from "../types/globalTypes";
 
 export default function BooksDetails() {
   const { id } = useParams();
 
   const { user } = useAppSelector((state) => state.user);
-
   const { data, isLoading } = useSingleBookQuery(id);
   const [deleteBook, { isLoading: deleteIsLoading }] = useDeleteBookMutation();
   const navigate = useNavigate();
@@ -26,7 +28,11 @@ export default function BooksDetails() {
       // Handle the error.
     }
   };
-
+  const dispatch = useAppDispatch();
+  const handleAddWishlist = (book: IBook) => {
+    dispatch(addToWishlist(book));
+    toast.success("Wishlist Added");
+  };
   if (isLoading) {
     return <Loding />;
   }
@@ -49,42 +55,23 @@ export default function BooksDetails() {
               <p> Genre : {data?.data?.genre}</p>
               <p> Publication Date : {data?.data?.publicationDate}</p>
               <div className="card-actions justify-end">
+                <button
+                  onClick={() => handleAddWishlist(data?.data)}
+                  className="btn btn-outline "
+                >
+                  Wishlist
+                </button>
                 {user?.email === data?.data?.userEmail ? (
                   <>
                     <Link to={`/edit-ooks/${data?.data?._id}`}>
                       <button className="btn btn-warning ">Edit</button>
                     </Link>
-                    {/* <button
-                      onClick={() => window.my_modal_1.showModal()}
-                      className="btn btn-error"
-                    >
-                      Delete
-                    </button> */}
-
                     {/* The button to open modal */}
                     <label htmlFor="my_modal_6" className="btn">
-                      open modal
+                      Delete
                     </label>
 
                     {/* Put this part before </body> tag */}
-                    <input
-                      type="checkbox"
-                      id="my_modal_6"
-                      className="modal-toggle"
-                    />
-                    <div className="modal">
-                      <div className="modal-box">
-                        <h3 className="font-bold text-lg">Hello!</h3>
-                        <p className="py-4">
-                          This modal works with a hidden checkbox!
-                        </p>
-                        <div className="modal-action">
-                          <label htmlFor="my_modal_6" className="btn">
-                            Close!
-                          </label>
-                        </div>
-                      </div>
-                    </div>
                   </>
                 ) : (
                   <>

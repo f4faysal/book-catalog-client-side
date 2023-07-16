@@ -36,8 +36,6 @@ const AddNewBookFrom = () => {
 
   const onSubmit = (data: LoginFormInputs) => {
     const bookData = { ...data, userEmail: user?.email, reviews: [] };
-    const openModal = () => window.conframModal.showModal();
-    openModal();
     setbookData(bookData);
   };
 
@@ -104,13 +102,21 @@ const AddNewBookFrom = () => {
           />
           {errors.publicationDate && <p>{errors.publicationDate.message}</p>}
         </div>
-        <div className="form-control my-6 m-2">
-          <button className="btn btn-block">Add New Book</button>
-        </div>
+        <label className="form-control my-6 m-2">
+          <button>
+            <label htmlFor="add_book_modal" className="btn btn-block">
+              Add New Book
+            </label>
+          </button>
+        </label>
       </div>
 
       <>
-        <AddBookModal getbookData={getbookData} reset={reset} />
+        <AddBookModal
+          getbookData={getbookData}
+          setbookData={setbookData}
+          reset={reset}
+        />
       </>
     </form>
   );

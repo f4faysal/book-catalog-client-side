@@ -8,7 +8,10 @@ export default function Home() {
   const searchTerm = "";
   const limitation = { pag: 1, limit: 10, searchTerm };
 
-  const { data, isLoading } = useGetBooksQuery(limitation);
+  const { data, isLoading } = useGetBooksQuery(limitation, {
+    refetchOnMountOrArgChange: true,
+    pollingInterval: 30000,
+  });
   // const { toast } = useToast();
   // const { status } = useAppSelector((state) => state.book);
   // console.log(status);

@@ -3,11 +3,13 @@ import App from "../App";
 import AddNewBook from "../pages/AddNewBook";
 import AllBooks from "../pages/AllBooks";
 import BooksDetails from "../pages/BooksDetails";
+import CurrentlyReading from "../pages/CurrentlyReading";
 import EditBooks from "../pages/EditBooks";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
 import Signup from "../pages/Signup";
+import Wishlist from "../pages/Wishlist";
 import PrivateRoute from "./PrivateRoute";
 
 const routes = createBrowserRouter([
@@ -22,6 +24,19 @@ const routes = createBrowserRouter([
       {
         path: "/all-books",
         element: <AllBooks />,
+      },
+      {
+        path: "/wishlist",
+        element: (
+          <PrivateRoute>
+            {" "}
+            <Wishlist />,
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/currently-reading",
+        element: <CurrentlyReading />,
       },
       {
         path: "/books-details/:id",

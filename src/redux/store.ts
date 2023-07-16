@@ -6,10 +6,12 @@ import { configureStore } from '@reduxjs/toolkit';
 import { api } from './api/apiSlice';
 import bookReducer from './features/book/bookSlice';
 import userReducer from './features/user/userSlice';
+import wishlistReducer from './features/wishlist/wishlistSlice';
 
 const store = configureStore({
      reducer: {
           books: bookReducer,
+          wishlist: wishlistReducer,
           user: userReducer,
           [api.reducerPath]: api.reducer,
      },
