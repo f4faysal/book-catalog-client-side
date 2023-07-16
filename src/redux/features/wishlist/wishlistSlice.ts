@@ -17,7 +17,7 @@ const wishlistSlice = createSlice({
                const existing = state.wishlist.find(
                     (wishlist) => wishlist?._id === action.payload?._id
                );
-               console.log(existing)
+
                if (existing) {
                     state.wishlist = state.wishlist.filter(
                          (book) => book?._id !== action.payload?._id)

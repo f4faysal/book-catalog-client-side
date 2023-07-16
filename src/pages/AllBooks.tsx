@@ -41,7 +41,6 @@ export default function AllBooks() {
   }, [data, dispatch, searchQuery]);
 
   const onSubmit = (data: LoginFormInputs) => {
-    console.log(searchQuery);
     setSearchQuery(data?.search);
   };
   const { books } = useAppSelector((state: any) => state.books);
@@ -49,14 +48,12 @@ export default function AllBooks() {
   const handleSelectChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     setSelectedOption(event.target.value);
-    console.log(event.target.value);
   };
   const handleSelectChangeDate = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     event.preventDefault();
     setselectedOptionDate(event.target.value);
-    console.log(event.target.value);
   };
 
   let serchAndFilterBook = [];

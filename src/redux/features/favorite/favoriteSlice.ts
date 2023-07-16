@@ -17,7 +17,7 @@ const favoriteSlice = createSlice({
                const existing = state.favorite.find(
                     (favorite) => favorite?._id === action.payload?._id
                );
-               console.log(existing)
+
                if (existing) {
                     state.favorite = state.favorite.filter(
                          (book) => book?._id !== action.payload?._id)

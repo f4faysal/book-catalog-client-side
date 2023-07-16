@@ -12,9 +12,6 @@ export default function Home() {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
   });
-  // const { toast } = useToast();
-  // const { status } = useAppSelector((state) => state.book);
-  // console.log(status);
 
   const booksData = data?.data;
 
